@@ -3,12 +3,14 @@ from redis import ConnectionPool, StrictRedis
 
 
 def get_client():
-    url = "redis-19999.c245.us-east-1-3.ec2.cloud.redislabs.com:19999"
+    url = "redis://127.0.0.1:6379"
     parse_url = parse.urlparse(url)
     cache_params = {
-                "host": "redis-19999.c245.us-east-1-3.ec2.cloud.redislabs.com",
-                "port": 19999,
-                "password": "RE3qQrhqiIgiy380aA82ZQFcDpvDJlyN",
+                "host": parse_url.hostname,
+                "port": parse_url.port,
+                "db": parse_url.path.replace("/", ""),
+                "password": parse_url.password,
+                "username": parse_url.username,
             }
     redis_pool = ConnectionPool(**cache_params)
     client = StrictRedis(connection_pool=redis_pool)
