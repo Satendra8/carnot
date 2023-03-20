@@ -1,14 +1,14 @@
 {
     "builds": [
         {
-            "src": "Device/wsgi.py",
+            "src": "carnot/wsgi.py",
             "use": "@vercel/python"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "Device/wsgi.py"
+            "dest": "carnot/wsgi.py"
         }
     ]
 }
